@@ -1,0 +1,49 @@
+.search-tippy {
+    width: 370px;
+    transform: translate(0px, 270px) !important;
+}
+.search-box {
+    display: flex;
+    background-color: var(--white_color);
+    border-radius: 20px;
+    width: 100%;
+    position: relative;
+}
+.search-button {
+    background-color: transparent;
+    border: none;
+    padding: 11px 10px;
+    margin-right: 8px;
+    color: var(--text_color);
+    transition: 0.5s;
+}
+.search-button:hover {
+    color: red;
+    transform: scale(1.2);
+}
+.search__loading {
+    position: absolute;
+    right: 52px;
+    padding: 11px 10px;
+    border: none;
+    color: red;
+    background-color: transparent;
+    animation: sniper 0.5s linear infinite;
+}
+.search__input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: var(--font-all-web);
+    font-size: 1.5rem;
+    border-radius: 20px;
+    padding: 10px 24px;
+}
+@keyframes sniper {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

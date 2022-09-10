@@ -1,0 +1,41 @@
+.conten__comic {
+    margin-bottom: 100px;
+    line-height: 1;
+    .comic__section {
+        display: flex;
+        flex-direction: row;
+    }
+}
+.comic__iteam {
+    height: max-content;
+    margin-bottom: 80px;
+    .comic__iteam--section {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+.comic__iteam--last {
+    margin-bottom: 0;
+}
+
+.img__description {
+    padding: 10px;
+}
+.img__description h5 {
+    font-size: 2rem;
+    color: var(--text_color);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+.img__description h6 {
+    font-size: 1.5rem;
+    color: #d94025;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+.img__description p {
+    font-size: 1.5rem;
+    color: var(--text_color);
+    text-align: justify;
+    height: 190px;
+}

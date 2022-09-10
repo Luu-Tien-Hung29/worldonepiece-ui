@@ -1,0 +1,75 @@
+.member--section {
+    .member__luffy {
+        margin-bottom: 50px;
+    }
+    .member_rest {
+        margin-left: 0px;
+    }
+}
+
+.img__luffy,
+.img__members {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    display: block;
+}
+
+.luffy__description,
+.members__description {
+    padding: 30px 15px 15px;
+    border: 2px solid #000;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: none;
+    font-family: var(--font-all-web);
+    line-height: 1;
+}
+.luffy__description a {
+    text-decoration: none;
+}
+.luffy__description p {
+    color: var(--text_color);
+    text-align: justify;
+}
+.luffy__head,
+.member__head {
+    font-size: 3rem;
+    line-height: 1;
+    background-color: var(--black_color);
+    color: var(--white_color);
+    border-radius: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: 0.5s linear;
+}
+.luffy__description a:hover .luffy__head,
+.members__description a:hover .member__head {
+    color: #d94025;
+}
+.luffy__name {
+    display: block;
+    text-transform: capitalize;
+    font-size: 2rem;
+    color: var(--text_color);
+    margin: 15px 0;
+}
+
+.img__members {
+    height: 290px;
+}
+.member__head {
+    font-size: 2rem;
+}
+.member__head::after {
+    height: 3px;
+}
+.members__description p {
+    color: var(--text_color);
+    text-align: justify;
+    height: 198px;
+}
+.member__item {
+    padding-bottom: 51px;
+}

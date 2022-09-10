@@ -1,0 +1,23 @@
+.more-shop {
+    margin-top: 100px;
+    text-align: center;
+    line-height: 1;
+    height: 45px;
+}
+.more-shop a {
+    display: inline-block;
+    font-size: 2rem;
+    color: var(--text_color);
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px;
+    border: 1px solid rgb(124, 120, 120);
+    transition: 0.3s linear;
+}
+.more-shop a:hover {
+    background-color: #d94025;
+    color: var(--white_color);
+    border: none;
+    border-radius: 20px;
+    transform: scale(1.1);
+}

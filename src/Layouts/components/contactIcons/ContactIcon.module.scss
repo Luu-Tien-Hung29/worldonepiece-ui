@@ -1,0 +1,21 @@
+.header__contact {
+    display: flex;
+    justify-content: space-between;
+    line-height: 48px;
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        display: block;
+        color: var(--white_color);
+        padding: 0 8px;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+    li:hover > a {
+        color: red;
+        transform: scale(1.3);
+    }
+}
