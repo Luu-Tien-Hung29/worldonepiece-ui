@@ -5,9 +5,9 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 import images from '~/assets/images';
 import BoxHeadComponent from '~/components/BoxHeadComponent';
-import { useStore } from '~/hooks';
-import { actions } from '~/components/store';
 import ButtonFoot from '../ButtonFoot';
+import { useDispatch, useSelector } from 'react-redux';
+import { totalItemCart } from '~/components/store/action';
 
 const cx = classNames.bind(styles);
 function Shop() {
@@ -37,7 +37,8 @@ function Shop() {
             price: '$55',
         },
     ];
-    const [state, dispatch] = useStore();
+    const dispatch = useDispatch();
+    const selector = useSelector((state) => state);
     return (
         <div className={cx('wrapper')}>
             <BoxHeadComponent title="from to Shop" className="mg-top" />
@@ -48,7 +49,7 @@ function Shop() {
                             <div className={cx('shop__img')}>
                                 <img src={itemShop.images} className={cx('shop__img--img')} alt="" />
                                 <button
-                                    onClick={() => dispatch(actions.totalItemCart(state.numberShop))}
+                                    onClick={() => dispatch(totalItemCart(selector.numberShop))}
                                     className={cx('shop--add-cart')}
                                 >
                                     <FontAwesomeIcon icon={faShoppingCart} />

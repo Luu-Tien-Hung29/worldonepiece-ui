@@ -13,7 +13,7 @@ const pulicPages = [
     {
         path: config.routes.Login,
         component: Login,
-        layout: OnlyHeaderLayout,
+        layout: null,
     },
     {
         path: config.routes.Register,

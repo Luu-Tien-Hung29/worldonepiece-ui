@@ -8,8 +8,12 @@ import styles from './Header.module.scss';
 import NavBarItems from '../NavBarItems';
 import images from '~/assets/images';
 import config from '~/config';
-import { useStore } from '~/hooks';
 import ContactIcon from '~/Layouts/components/contactIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTabLogin } from '~/components/store/action';
+import { getUserinfo } from '~/untils/localStorage';
+import avtDefault from '~/assets/images/login/avtDefault.png';
+import { Avatar } from '@mui/material';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -99,7 +103,10 @@ function Header() {
             ],
         },
     ];
-    const [state] = useStore();
+    const userInfo = getUserinfo();
+    const selector = useSelector((state) => state);
+    const dispatch = useDispatch();
+
     return (
         <header className={cx('header')}>
             <div className={cx('header__nav-bar', ' gird--full-screen')}>
@@ -124,19 +131,52 @@ function Header() {
                     ))}
                 </ul>
                 <div className={cx('header__market', 'gird__row')}>
-                    <Link className={cx('header__market--item')} to={config.routes.Login}>
-                        Login
-                    </Link>
-                    <Link className={cx('header__market--item')} to={config.routes.Register}>
-                        Register
-                    </Link>
-                    <Tippy content={'Shop'}>
-                        <Link className={cx('header__market--icon')} to={config.routes.Shop}>
-                            <FontAwesomeIcon icon={faShoppingCart} />
+                    {!userInfo ? (
+                        <>
+                            <Link
+                                onClick={() => {
+                                    dispatch(changeTabLogin('login'));
+                                }}
+                                className={cx('header__market--item')}
+                                to={config.routes.Login}
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                onClick={() => {
+                                    dispatch(changeTabLogin('register'));
+                                }}
+                                className={cx('header__market--item')}
+                                to={config.routes.Login}
+                            >
+                                Register
+                            </Link>
+                            <Tippy content={'Shop'}>
+                                <Link className={cx('header__market--icon')} to={config.routes.Shop}>
+                                    <FontAwesomeIcon icon={faShoppingCart} />
 
-                            {state.numberShop > 0 && <span className={cx('number-shop')}>{state.numberShop}</span>}
-                        </Link>
-                    </Tippy>
+                                    {selector.numberShop > 0 && (
+                                        <span className={cx('number-shop')}>{selector.numberShop}</span>
+                                    )}
+                                </Link>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <div></div>
+                    )}
+
+                    {userInfo ? (
+                        <div style={{ minWidth: 178 }}>
+                            <div className={cx('avt')}>
+                                <Avatar
+                                    alt="avatar"
+                                    src={avtDefault}
+                                    sx={{ width: 65, height: 65, position: 'relative' }}
+                                />
+                                <FontAwesomeIcon icon={faAngleDown} />
+                            </div>
+                        </div>
+                    ) : null}
                 </div>
             </div>
 

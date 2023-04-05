@@ -1,1 +1,11 @@
 export const TOTAL_ITEM_CART = 'total_item_cart';
+export const TAB_LOGIN = 'tab_login';
+// SNACKBAR
+export const ONCHANGE_SNACKBAR = 'ONCHANGE_SNACKBAR';
+export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
+
+// LOGIN AND REGISTER
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const REGISTER_USER = 'REGISTER_USER';
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';

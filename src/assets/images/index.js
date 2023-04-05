@@ -20,5 +20,6 @@ const images = {
     comic61: require('~/assets/images/comic/time skip.jpg'),
     comic87: require('~/assets/images/comic/bắt đầu đánh băng big mom.jpg'),
     footer: require('~/assets/images/footer/thumb-1920-123037.jpg'),
+    login: require('~/assets/images/login/login.jpg'),
 };
 export default images;
