@@ -52,13 +52,46 @@
 .header__market {
     position: relative;
     .header__market--icon {
-        margin: 0 8px;
+        margin: 0;
         padding-right: 21px;
         font-size: 2rem;
         &.is_login {
             margin-right: 100px;
         }
     }
+}
+.menu-header{
+    margin-top: -10px;
+   p{
+      font-size: 1.6rem;
+      font-weight: 500;
+      svg{
+        margin-right: 15px;
+      }
+   }
+   .item-menu{
+    transition: 0.5s;
+    &.boder-bottom{
+        border-bottom: 1px solid #000;
+       }
+    &:hover{
+        color: red;
+    }
+    .item-shop{
+        position: absolute;
+        line-height: 1;
+        top: 0;
+        left: 25px;
+        padding: 2px 4px;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--white_color);
+        font-family: var(--font-all-web);
+        background-color: red;
+    }
+   }
+   
 }
 .number-shop {
     position: absolute;

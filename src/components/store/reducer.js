@@ -5,9 +5,13 @@ import {
     LOGIN_USER,
     LOGIN_USER_SUCCESS,
     ONCHANGE_SNACKBAR,
+    REFRESH_TOKEN_SUCCESS,
+    REGISTER_USER,
+    REGISTER_USER_SUCCESS,
     TAB_LOGIN,
     TOTAL_ITEM_CART,
 } from './contant';
+import { getUserinfo, saveUserInfo } from '~/untils/localStorage';
 
 export const initState = {
     numberShop: 0,
@@ -19,7 +23,7 @@ export const initState = {
         severity: 'success',
     },
 };
-
+const userInfo = getUserinfo();
 function reducer(state = initState, action) {
     switch (action.type) {
         case TOTAL_ITEM_CART:
@@ -60,6 +64,21 @@ function reducer(state = initState, action) {
                 ...state,
                 isLoading: false,
             };
+        case REGISTER_USER:
+            return {
+                ...state,
+                isLoading: true,
+            };
+        case REGISTER_USER_SUCCESS:
+            return {
+                ...state,
+                tabLogin: 'login',
+                isLoading: false,
+            };
+        case REFRESH_TOKEN_SUCCESS:
+            const userInfo = { ...userInfo, accessToken: action.payload.accessToken };
+            saveUserInfo(userInfo);
+            return;
         default:
             return state;
     }

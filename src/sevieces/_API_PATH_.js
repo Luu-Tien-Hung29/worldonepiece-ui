@@ -1,5 +1,6 @@
 const API_PATHS = {
     login: 'auth/login',
-    regiter: 'auth/regiter',
+    register: 'auth/register',
+    refresh: 'auth/refresh',
 };
 export default API_PATHS;

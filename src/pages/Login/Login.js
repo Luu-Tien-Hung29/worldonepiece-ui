@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import config from '~/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { tabLogin } from '~/components/store/selector';
-import { changeTabLogin, userLogin } from '~/components/store/action';
+import { changeTabLogin, userLogin, userRegister } from '~/components/store/action';
 import { getUserinfo } from '~/untils/localStorage';
 
 const cx = classNames.bind(styles);
@@ -47,7 +47,7 @@ function Login() {
         }
     };
     const handleLogin = () => {
-        if (!state.userName || !state.password) {
+        if (!state.userName || !state.password || (tab === 'register' && !state.confirmPassword)) {
             let obj = {};
             for (let key in state) {
                 if (!state[key]) {
@@ -60,7 +60,7 @@ function Login() {
             if (tab === 'login') {
                 dispatch(userLogin(state));
             } else {
-                // call api register
+                dispatch(userRegister(state));
             }
         }
     };
@@ -71,7 +71,6 @@ function Login() {
             dispatch(changeTabLogin('register'));
         }
     };
-
     return (
         <div className={cx('container')}>
             <div className={cx('box-login')}>
@@ -111,6 +110,7 @@ function Login() {
                                         label="Confirm password"
                                         fullWidth
                                         variant="standard"
+                                        type="password"
                                         value={state.confirmPassword}
                                         onChange={(e) => handleChangeState('confirmPassword', e)}
                                         className={cx('input-body')}

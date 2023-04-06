@@ -2,7 +2,16 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import {
+    faAngleDown,
+    faPersonRifle,
+    faRightFromBracket,
+    faScrewdriverWrench,
+    faShoppingCart,
+    faUnlock,
+    faUser,
+    faUserSecret,
+} from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import NavBarItems from '../NavBarItems';
@@ -11,9 +20,10 @@ import config from '~/config';
 import ContactIcon from '~/Layouts/components/contactIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTabLogin } from '~/components/store/action';
-import { getUserinfo } from '~/untils/localStorage';
+import { destroyUser, getUserinfo } from '~/untils/localStorage';
 import avtDefault from '~/assets/images/login/avtDefault.png';
-import { Avatar } from '@mui/material';
+import { Avatar, Box, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -103,9 +113,58 @@ function Header() {
             ],
         },
     ];
+    const navbarSetting = [
+        {
+            label: 'Profile',
+            icon: <FontAwesomeIcon icon={faUser} />,
+        },
+        {
+            label: 'Setting',
+            icon: <FontAwesomeIcon icon={faScrewdriverWrench} />,
+        },
+        {
+            label: 'Shop',
+            icon: <FontAwesomeIcon icon={faShoppingCart} />,
+        },
+        {
+            label: 'Change Password',
+            icon: <FontAwesomeIcon icon={faUnlock} />,
+            boder: true,
+        },
+        {
+            label: 'Logout',
+            icon: <FontAwesomeIcon icon={faRightFromBracket} />,
+        },
+    ];
     const userInfo = getUserinfo();
     const selector = useSelector((state) => state);
     const dispatch = useDispatch();
+    const [anchorElUser, setAnchorElUser] = useState(null);
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+    const handleClickItem = (data) => {
+        handleCloseUserMenu();
+        switch (data.toLowerCase()) {
+            case 'profile':
+                return;
+            case 'setting':
+                return;
+            case 'shop':
+                return;
+            case 'change password':
+                return;
+            case 'logout':
+                destroyUser();
+                return;
+
+            default:
+                break;
+        }
+    };
 
     return (
         <header className={cx('header')}>
@@ -161,20 +220,57 @@ function Header() {
                                 </Link>
                             </Tippy>
                         </>
-                    ) : (
-                        <div></div>
-                    )}
+                    ) : null}
 
                     {userInfo ? (
                         <div style={{ minWidth: 178 }}>
-                            <div className={cx('avt')}>
-                                <Avatar
-                                    alt="avatar"
-                                    src={avtDefault}
-                                    sx={{ width: 65, height: 65, position: 'relative' }}
-                                />
-                                <FontAwesomeIcon icon={faAngleDown} />
-                            </div>
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Tooltip
+                                    placement="left"
+                                    title={<div style={{ fontSize: '1.2rem' }}> Open Setting</div>}
+                                >
+                                    <div className={cx('avt')} onClick={handleOpenUserMenu}>
+                                        <Avatar
+                                            alt="avatar"
+                                            src={avtDefault}
+                                            sx={{ width: 65, height: 65, position: 'relative' }}
+                                        />
+                                        <FontAwesomeIcon icon={faAngleDown} />
+                                    </div>
+                                </Tooltip>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+                                    keepMounted
+                                    // transformOrigin={{
+                                    //     vertical: 'top',
+                                    //     horizontal: 'right',
+                                    // }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
+                                    className={cx('menu-header')}
+                                >
+                                    {navbarSetting.map((setting, index) => (
+                                        <MenuItem
+                                            className={cx(`${setting?.boder ? 'boder-bottom' : ''}`, 'item-menu')}
+                                            key={index}
+                                            onClick={() => handleClickItem(setting.label)}
+                                        >
+                                            <Typography textAlign="center">
+                                                {setting.icon}
+                                                {setting.label}
+                                            </Typography>
+                                            {selector.numberShop > 0 && setting.label.toLowerCase() === 'shop' && (
+                                                <span className={cx('item-shop')}>{selector.numberShop}</span>
+                                            )}
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </Box>
                         </div>
                     ) : null}
                 </div>

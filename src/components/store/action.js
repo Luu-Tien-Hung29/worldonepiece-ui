@@ -7,6 +7,8 @@ import {
     REGISTER_USER_SUCCESS,
     ONCHANGE_SNACKBAR,
     CLOSE_SNACKBAR,
+    REFRESH_TOKEN,
+    REFRESH_TOKEN_SUCCESS,
 } from './contant';
 
 export const totalItemCart = (payload) => {
@@ -43,6 +45,18 @@ export const userRegister = (payload) => {
 export const userRegisterSuccess = (payload) => {
     return {
         type: REGISTER_USER_SUCCESS,
+        payload,
+    };
+};
+export const refreshToken = (payload) => {
+    return {
+        type: REFRESH_TOKEN,
+        payload,
+    };
+};
+export const refreshTokenSuccess = (payload) => {
+    return {
+        type: REFRESH_TOKEN_SUCCESS,
         payload,
     };
 };
