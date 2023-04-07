@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { pulicPages } from '~/routes';
 import DefaultLayout from '~/Layouts/DefaultLayout';
@@ -6,16 +6,9 @@ import SnackbarComponent from './components/SnackbarComponent';
 import { useSelector } from 'react-redux';
 import { isLoading, snackBar } from './components/store/selector';
 import Loading from './components/Loading';
-import { refreshToken } from './components/store/action';
-import { getUserinfo } from './untils/localStorage';
 function App() {
     const runSnackBar = useSelector(snackBar);
     const loading = useSelector(isLoading);
-    const user = getUserinfo();
-
-    useEffect(() => {
-        setInterval(refreshToken({ refreshToken: user.refreshToken }), 1000 * 60 * 9);
-    });
     return (
         <Router>
             <div className="App">

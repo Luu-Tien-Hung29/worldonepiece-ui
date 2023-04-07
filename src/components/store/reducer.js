@@ -23,7 +23,6 @@ export const initState = {
         severity: 'success',
     },
 };
-const userInfo = getUserinfo();
 function reducer(state = initState, action) {
     switch (action.type) {
         case TOTAL_ITEM_CART:
@@ -76,7 +75,8 @@ function reducer(state = initState, action) {
                 isLoading: false,
             };
         case REFRESH_TOKEN_SUCCESS:
-            const userInfo = { ...userInfo, accessToken: action.payload.accessToken };
+            const user = getUserinfo();
+            const userInfo = { ...user, accessToken: action.payload.accessToken };
             saveUserInfo(userInfo);
             return;
         default:

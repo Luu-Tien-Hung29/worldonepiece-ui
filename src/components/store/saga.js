@@ -4,7 +4,6 @@ import { postApi, request } from '~/sevieces/configApi';
 import { LOGIN_USER, REFRESH_TOKEN, REGISTER_USER } from './contant';
 import { onChangeSnackbar, userLoginSuccess, userRegisterSuccess } from './action';
 import { saveUserInfo } from '~/untils/localStorage';
-import { postApiToken, requestToken } from '~/sevieces/configApiToken';
 
 function* fetchUserLogin(action) {
     const { payload } = action;
@@ -46,8 +45,9 @@ function* fetchRefreshToken(action) {
     const { payload } = action;
     const { refreshToken } = payload;
     const body = { refreshToken };
+    console.log(refreshToken, 'refreshToken');
     try {
-        const data = yield call([requestToken, () => postApiToken(API_PATHS.refresh, body)]);
+        const data = yield call([request, () => postApi(API_PATHS.refresh, body)]);
         if (data.responseCode === 200 && data.type.toLowerCase() === 'success') {
             yield put(userRegisterSuccess(data.data));
         } else {

@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAngleDown,
-    faPersonRifle,
     faRightFromBracket,
     faScrewdriverWrench,
     faShoppingCart,
     faUnlock,
     faUser,
-    faUserSecret,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';

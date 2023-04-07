@@ -49,6 +49,7 @@ export const userRegisterSuccess = (payload) => {
     };
 };
 export const refreshToken = (payload) => {
+    console.log(payload, 'payload');
     return {
         type: REFRESH_TOKEN,
         payload,
