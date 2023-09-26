@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import API_PATHS from '~/sevieces/_API_PATH_';
-import { postApi, request } from '~/sevieces/configApi';
-import { LOGIN_USER, REFRESH_TOKEN, REGISTER_USER } from './contant';
-import { onChangeSnackbar, userLoginSuccess, userRegisterSuccess } from './action';
+import { getApi, postApi, request } from '~/sevieces/configApi';
+import { GET_USER, LOGIN_USER, REFRESH_TOKEN, REGISTER_USER } from './contant';
+import { getUserSuccess, onChangeSnackbar, userLoginSuccess, userRegisterSuccess } from './action';
 import { saveUserInfo } from '~/untils/localStorage';
 
 function* fetchUserLogin(action) {
@@ -57,9 +57,22 @@ function* fetchRefreshToken(action) {
         console.log(e.message);
     }
 }
+function* fetchGetUser(action) {
+    try {
+        const data = yield call([request, () => getApi(API_PATHS.getUser)]);
+        if (data.responseCode === 200 && data.type.toLowerCase() === 'success') {
+            yield put(getUserSuccess(data.data));
+        } else {
+            console.log(data, 'error');
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+}
 
 export default function* rootSaga() {
     yield takeLatest(LOGIN_USER, fetchUserLogin);
     yield takeLatest(REGISTER_USER, fetchUserRegister);
     yield takeLatest(REFRESH_TOKEN, fetchRefreshToken);
+    yield takeLatest(GET_USER, fetchGetUser);
 }

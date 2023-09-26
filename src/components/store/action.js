@@ -9,6 +9,8 @@ import {
     CLOSE_SNACKBAR,
     REFRESH_TOKEN,
     REFRESH_TOKEN_SUCCESS,
+    GET_USER,
+    GET_USER_SUCCESS,
 } from './contant';
 
 export const totalItemCart = (payload) => {
@@ -75,6 +77,19 @@ export const onChangeSnackbar = (open, message, severity) => {
 export const closeSnackbar = (payload) => {
     return {
         type: CLOSE_SNACKBAR,
+        payload,
+    };
+};
+// get user
+export const getUser = (payload) => {
+    return {
+        type: GET_USER,
+        payload,
+    };
+};
+export const getUserSuccess = (payload) => {
+    return {
+        type: GET_USER_SUCCESS,
         payload,
     };
 };

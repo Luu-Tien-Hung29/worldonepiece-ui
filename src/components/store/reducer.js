@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import {
     CLOSE_SNACKBAR,
+    GET_USER_SUCCESS,
     LOGIN_USER,
     LOGIN_USER_SUCCESS,
     ONCHANGE_SNACKBAR,
@@ -22,6 +23,7 @@ export const initState = {
         message: '',
         severity: 'success',
     },
+    user: {},
 };
 function reducer(state = initState, action) {
     switch (action.type) {
@@ -79,6 +81,11 @@ function reducer(state = initState, action) {
             const userInfo = { ...user, accessToken: action.payload.accessToken };
             saveUserInfo(userInfo);
             return;
+        case GET_USER_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+            };
         default:
             return state;
     }
