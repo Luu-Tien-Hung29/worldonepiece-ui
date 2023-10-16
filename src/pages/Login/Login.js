@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tabLogin } from '~/components/store/selector';
 import { changeTabLogin, userLogin, userRegister } from '~/components/store/action';
 import { getUserinfo } from '~/untils/localStorage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,7 @@ function Login() {
         confirmPassword: '',
         savePass: false,
     });
+    const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState({
         userName: false,
         password: false,
@@ -94,18 +97,33 @@ function Login() {
                                     helperText={error.userName ? 'Vui lòng nhập trường này' : null}
                                     error={error.userName}
                                 />
-                                <TextField
-                                    label="Password"
-                                    fullWidth
-                                    type="password"
-                                    variant="standard"
-                                    value={state.password}
-                                    onChange={(e) => handleChangeState('password', e)}
-                                    className={cx('input-body')}
-                                    required
-                                    helperText={error.password ? 'Vui lòng nhập trường này' : null}
-                                    error={error.password}
-                                />
+                                <div className={cx('box-pass')}>
+                                    <TextField
+                                        label="Password"
+                                        fullWidth
+                                        type={showPass ? 'text' : 'password'}
+                                        variant="standard"
+                                        value={state.password}
+                                        onChange={(e) => handleChangeState('password', e)}
+                                        className={cx('input-body')}
+                                        required
+                                        helperText={error.password ? 'Vui lòng nhập trường này' : null}
+                                        error={error.password}
+                                    />
+                                    <i
+                                        className={cx('icon-pass')}
+                                        onClick={() => {
+                                            setShowPass(!showPass);
+                                        }}
+                                    >
+                                        {showPass ? (
+                                            <FontAwesomeIcon icon={faEyeSlash} />
+                                        ) : (
+                                            <FontAwesomeIcon icon={faEye} />
+                                        )}
+                                    </i>
+                                </div>
+
                                 {tab === 'register' ? (
                                     <TextField
                                         label="Confirm password"
